@@ -44,7 +44,21 @@
     <script type="text/javascript" th:src="@{/js/jquery-barcode.js}"></script>
     <script  th:src="@{/js/jQuery.print.js}"></script>
 
+<style>
+    @media print {
+        #emaill{
+           color: lightgreen !important;
+        }
+    }
 
+    img{
+
+    }
+    #details
+    {
+
+    }
+    </style>
 </head>
 
 <body>
@@ -98,20 +112,25 @@
                     <a th:href="'#'+${status.index}"  class="btn btn-primary btn-xs" data-toggle="modal"  data-whatever="@mdo">Generates Barcode</a>
                 </td>
 
-                <div class="modal fade" th:id="${status.index}" tabindex="-1" role="dialog" aria-labelledby="attandantparticipantModalTitle" aria-hidden="true">
+                <div class="modal fade" th:id="${status.index}" tabindex="-1" role="dialog" aria-labelledby="attandantparticipantModalTitle" aria-hidden="true" >
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h2 class="modal-title" id="attandantparticipantModalTitle">Generae Barcode</h2>
-
                             </div>
                             <input th:id="'txtbarcode'+${status.index}" type="text" th:value="${user.id}"/>
-                            <div class="modal-body" th:id="'barcodeprint'+${status.index}" style="margin-left:65px; margin-top:-8px" >
-                                <h5>Email: <span th:text="${user.email}"></span></h5>
+                            <div class="modal-body" th:id="'barcodeprint'+${status.index}" style="margin-left:65px; margin-top:-8px; position:relative;" >
+                                <img th:src="@{/image/background.jpg}" alt="image not found" width="300px" height="400px"/>
+                                <div id="details" style="position:absolute;     bottom: 18px;
+    left: 18px;">
+                                <h5>Email: <span th:text="${user.email}" style="color: red" id="emaill"></span></h5>
                                 <h5>Organization: <span th:text="${user.organization}"></span></h5>
                                 <h5>Designation: <span th:text="${user.designation}"></span></h5>
                                 <h5>Number: <span th:text="${user.number}"></span></h5>
-                                <div th:id="'barcodes'+${status.index}" ></div>
+
+                                </div>
+                                <div th:id="'barcodes'+${status.index}"  style="position: absolute; bottom:24px; left:200px;"  ></div>
+
 
                             </div>
                             <div class="modal-footer">
@@ -135,6 +154,7 @@
 
 <div th:replace="common/header :: common-footer"/>
 <!--<div th:replace="common/header :: body-bottom-scripts"/>-->
+
 
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/bootbox.min.js}"></script>

@@ -13,7 +13,7 @@ public class Lunch {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id")
     private Users users;
 

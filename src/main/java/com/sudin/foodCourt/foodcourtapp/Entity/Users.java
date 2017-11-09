@@ -35,6 +35,15 @@ public class Users {
     @Column(name = "Number")
     private String number;
 
+    @OneToOne(mappedBy = "users",cascade = CascadeType.ALL)
+    private Entry entry;
+
+    @OneToOne(mappedBy = "users",cascade = CascadeType.ALL)
+    private Lunch lunch;
+
+    @OneToOne(mappedBy = "users",cascade = CascadeType.ALL)
+    private Dinner dinner;
+
     @JsonIgnore
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
