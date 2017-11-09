@@ -77,15 +77,19 @@ public class EntryController {
         String success="";
         String error="";
         Users user=userRepository.findById(userid);
-
+Entry entry=entryRepository.findByUsers(user);
         if(user!=null){
             Lunch checkLunch=lunchRepository.findByUsers(user);
             if(checkLunch==null) {
-
-                Lunch lunch = new Lunch(user);
-                lunchRepository.save(lunch);
-                success = "Lunch completed successfully";
-                redirectAttributes.addFlashAttribute("success",success);
+                if(entry!=null) {
+                    Lunch lunch = new Lunch(user);
+                    lunchRepository.save(lunch);
+                    success = "Lunch completed successfully";
+                    redirectAttributes.addFlashAttribute("success", success);
+                }else{
+                    System.out.println("entry not completed");
+                    redirectAttributes.addFlashAttribute("error","Entry not done yet");
+                }
             }
             else{
                 error="Lunch already done";
@@ -111,15 +115,18 @@ public class EntryController {
         String success="";
         String error="";
         Users user=userRepository.findById(userid);
-
+        Entry entry=entryRepository.findByUsers(user);
         if(user!=null){
             Dinner checkDinner=dinnerRepository.findByUsers(user);
             if(checkDinner==null) {
-
-                Dinner dinner = new Dinner(user);
-                dinnerRepository.save(dinner);
-                success = "Dinner taken successfully";
-                redirectAttributes.addFlashAttribute("success",success);
+                if(entry!=null) {
+                    Dinner dinner = new Dinner(user);
+                    dinnerRepository.save(dinner);
+                    success = "Dinner taken successfully";
+                    redirectAttributes.addFlashAttribute("success", success);
+                }else{
+                    redirectAttributes.addFlashAttribute("error", "Entry not done yet");
+                }
             }
             else{
                 error="Dinner already done";
